@@ -1,0 +1,10 @@
+# Created Jun 22, 2020 by Jared Hale
+
+### macOS ###
+.DS_Store
+
+### MATLAB ###
+.m~
+.autosave
+
+# End of .gitignore
