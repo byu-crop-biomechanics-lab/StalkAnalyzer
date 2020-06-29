@@ -18,7 +18,7 @@ try
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     FilePath = inputdlg('Please enter the name of the folder you want to load from : ' );
-    FilePath = ( strcat( FilePath, '\' ) );
+    FilePath = ( strcat( FilePath, '/' ) );                                                 %% WAS DESIGNED ONLY FOR WINDOWS AND NOT UNIX!!! Occurs on lines: 21, 37, 39, 837, 845, 1634, 1642. ADJUSTED ALL '\' TO '/' AFTER READING THIS IS ALSO ACCEPTABLE ON WINDOWS
     FilePath = (FilePath{:}); % THIS IS NEEDED IF USERINPUT IS TURNED ON!
     % FilePath = opsyswitch(FilePath);
     dirList = dir(FilePath);                                            % dir directory_name lists the files in a directory.
@@ -34,9 +34,9 @@ try
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
-        OutPath = ( strcat( FilePath, 'results\' ) ); % OutPath = ( strcat( FilePath, '\', 'results\' ) );
+        OutPath = ( strcat( FilePath, 'results/' ) ); % OutPath = ( strcat( FilePath, '\', 'results\' ) );
         mkdir ( OutPath );
-        mkdir ( [OutPath 'Bundles\'] );
+        mkdir ( [OutPath 'Bundles/'] );
         O.OutPath = OutPath;
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -834,7 +834,7 @@ try
                                                             % outfile =  [brara(1,1)*((316.6)^.5), brara(2,2)*((316.6)^.5), (pi*brara(1,1)*brara(2,2)/ 316.6)]; % ComponentCovariances(:)';
                                                             
                                                             outfile =  [brara(1,1)/(316), brara(2,2)/(316), (pi*brara(1,1)*brara(2,2)/(316*316))];
-                                                            output = [ OutPath 'Bundles\' nm1 '-' r '-' num2str(c) '-' num2str(niter) '-'  num2str(k) '-bund_size.xls' ]; % num2str(kappa) '-' num2str(k) '-bund_size.xls'];
+                                                            output = [ OutPath 'Bundles/' nm1 '-' r '-' num2str(c) '-' num2str(niter) '-'  num2str(k) '-bund_size.xls' ]; % num2str(kappa) '-' num2str(k) '-bund_size.xls'];
                                                             fid2 = fopen(output, 'w+'); % ('output.txt','w');
                                                             if fid2 >= 0
                                                                 csvwrite( output,outfile );
@@ -842,7 +842,7 @@ try
                                                                 fclose( fid2 );
                                                             end
                                                             
-                                                            ofs6 = [OutPath 'Bundles\' nm1 '-' r '-' num2str(c)  '-' num2str(niter) '-' num2str(k) '-bund_size.tif']; %  num2str(kappa) '-' num2str(k) '-bund_size.tif'];
+                                                            ofs6 = [OutPath 'Bundles/' nm1 '-' r '-' num2str(c)  '-' num2str(niter) '-' num2str(k) '-bund_size.tif']; %  num2str(kappa) '-' num2str(k) '-bund_size.tif'];
                                                             
                                                             hold off;
                                                             fid3 = fopen( ofs6, 'w+' );
@@ -1631,7 +1631,7 @@ try
                                                                 % brara = sqrt(obj.Sigma);
                                                                 % outfile =  [brara(1,1)*((316.6)^.5), brara(2,2)*((316.6)^.5), (pi*brara(1,1)*brara(2,2)/ 316.6)]; % ComponentCovariances(:)';
                                                                 outfile =  [brara(1,1)/(316), brara(2,2)/(316), (pi*brara(1,1)*brara(2,2)/( 316*316 ))]; % ComponentCovariances(:)';
-                                                                output = [OutPath 'Bundles\' nm1 '-' r '-' num2str(c) '-' num2str(niter) '-'  num2str(k) '-bund_size.xls']; % num2str(kappa) '-' num2str(k) '-bund_size.xls'];
+                                                                output = [OutPath 'Bundles/' nm1 '-' r '-' num2str(c) '-' num2str(niter) '-'  num2str(k) '-bund_size.xls']; % num2str(kappa) '-' num2str(k) '-bund_size.xls'];
                                                                 fid2 = fopen(output, 'w+'); % ('output.txt','w');
                                                                 if fid2 >= 0
                                                                     csvwrite( output, outfile);
@@ -1639,7 +1639,7 @@ try
                                                                     fclose(fid2);
                                                                 end
                                                                 
-                                                                ofs6 = [OutPath 'Bundles\' nm1 '-' r '-' num2str(c)  '-' num2str(niter) '-' num2str(k) '-bund_size.tif']; %  num2str(kappa) '-' num2str(k) '-bund_size.tif'];
+                                                                ofs6 = [OutPath 'Bundles/' nm1 '-' r '-' num2str(c)  '-' num2str(niter) '-' num2str(k) '-bund_size.tif']; %  num2str(kappa) '-' num2str(k) '-bund_size.tif'];
                                                                 
                                                                 hold off;
                                                                 fid3 = fopen( ofs6, 'w+' );
