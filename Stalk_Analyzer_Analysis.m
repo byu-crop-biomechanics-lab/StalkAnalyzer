@@ -1,6 +1,6 @@
 
-function[] = Stalk_Analyzer_Analysis()
-try
+% function[] = Stalk_Analyzer_Analysis()
+% try
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Where to put the results
@@ -72,9 +72,16 @@ try
                 
                 hold on;
                 
-                Im = imresize(Im,.25);
+                Im = imresize(rgb,.25);
                 hold off;
                 fid2 = fopen(ofs1, 'w+'); % ('output.txt','w');
+                
+                figure(2)
+                clf
+                imshow(Im)
+                Im_rs = Im;
+                Im = figure(2);
+                
                 if fid2 >= 0
                     saveas (Im,ofs1,'tif');
                     fclose(fid2);
@@ -105,13 +112,16 @@ try
                 % title('Spots-only image');
                 hold on;
                 
-                Im = imresize(Im,.25);
+                Im = imresize(Tb,.25);
                 hold off;
                 
                 % saveas (Im,ofs10,'tif');
                 fid2 = fopen( ofs10, 'w+' ); % ('output.txt','w');
                 if fid2 >= 0
-                    saveas (Im, ofs10, 'tif');
+%                     figure(32)
+%                     clf
+%                     imshow(Im)
+                    saveas (gcf, ofs10, 'tif');
                     % imwrite( Im, ofs10 );
                     fclose(fid2);
                 end
@@ -154,7 +164,7 @@ try
                             
                             hold on;
                             
-                            Im = imresize(Im,.25);
+                            Im = imresize(Ic,.25);
                             hold off;
                             fid2 = fopen(ofs2, 'w+'); % ('output.txt','w');
                             if fid2 >= 0
@@ -204,7 +214,7 @@ try
                             
                             hold off;
                             % pause(5);
-                            Im = imresize(Im,.25);
+                            Im = imresize(Ic,.25);
                             fid2 = fopen(ofs3, 'w+'); % ('output.txt','w');
                             if fid2 >= 0
                                 saveas (Im,ofs3,'tif');
@@ -326,7 +336,7 @@ try
                             blobBoundary = boundaries{ max_index };
                             plot(blobBoundary(:,2), blobBoundary(:,1), 'r-', 'LineWidth', 2);
                             hold off;
-                            Im_pith = imresize(Im_pith,.25);
+                            Im_pith = imresize(I0,.25);
                             fid2 = fopen(ofs4, 'w+'); % ('output.txt','w');
                             if fid2 >= 0
                                 saveas (Im_pith,ofs4,'tif');
@@ -551,7 +561,7 @@ try
                             scatter (Z(:,2), Z(:,1) , 'r.');
                             title(['There are ' num2str(numel(Z(:,1))) ' vascular bundles in the stalk']);
                             hold off;
-                            Im = imresize(Im,.25);
+                            Im = imresize(Ic,.25);
                             fid2 = fopen(ofs5, 'w+'); % ('output.txt','w');
                             if fid2 >= 0
                                 saveas (Im,ofs5,'tif');
@@ -569,7 +579,7 @@ try
                             plot(blobBoundary(:,2), blobBoundary(:,1), 'b-', 'LineWidth', 1);
                             title('Pith outline and found vascular bundles superimposed on original image');
                             hold off;
-                            Im7 = imresize(Im7,.25);
+                            Im7 = imresize(Ic,.25);
                             fid2 = fopen(ofs7, 'w+'); % ('output.txt','w');
                             if fid2 >= 0
                                 saveas (Im7,ofs7,'tif');
@@ -847,7 +857,7 @@ try
                                                             hold off;
                                                             fid3 = fopen( ofs6, 'w+' );
                                                             if fid3 >= 0
-                                                                ImZ = imresize(ImZ,.25);
+                                                                ImZ = imresize(Ione,.25);
                                                                 %imwrite ( ImZ,ofs6 ); %
                                                                 saveas (ImZ,ofs6,'tif');
                                                                 fclose(fid3);
@@ -899,11 +909,14 @@ try
                                 Im = figure;
                                 imshow( Ic ), title( ['cropped image - '  num2str(c)] ); % num2str(v)]);
                                 hold on;
-                                Im = imresize( Im,.25 );
+                                Im = imresize( Ic,.25 );
                                 hold off;
                                 fid2 = fopen( ofs2, 'w+' ); % ('output.txt','w');
                                 if fid2 >= 0
-                                    saveas ( Im, ofs2, 'tif' ); % imwrite( Im, ofs2 ); %
+%                                     figure(33)
+%                                     clf
+%                                     imshow(Im)
+                                    saveas (gcf, ofs2, 'tif' ); % imwrite( Im, ofs2 ); %
                                     fclose(fid2);
                                 end
                                 
@@ -964,10 +977,13 @@ try
                                 plot(blobBoundary(:,2), blobBoundary(:,1), 'r-', 'LineWidth', 2);
                                 hold off;
                                 % pause(5);
-                                Im = imresize(Im,.25);
+                                Im = imresize(Ic,.25);
                                 fid2 = fopen(ofs3, 'w+'); % ('output.txt','w');
                                 if fid2 >= 0
-                                    saveas (Im,ofs3,'tif');
+%                                     figure(34)
+%                                     clf
+%                                     imshow(Im)
+                                    saveas (gcf,ofs3,'tif');
                                     fclose(fid2);
                                 end
                                 
@@ -1140,7 +1156,8 @@ try
                                 
                                 %end                      % end of loop 6 ("determine the area of the pith")
                                 hold off;
-                                Im_pith = figure; imshow(Ic, []);
+                                Im_pith = figure; 
+                                imshow(Ic, []);
                                 hold on; % Prevent plot() from blowing away the image.
                                 title('Original Color Image with Pith Outlined');
                                 % Get its boundary and overlay it over the original image.
@@ -1151,11 +1168,14 @@ try
                                 plot(blobBoundary(:,2), blobBoundary(:,1), 'r-', 'LineWidth', 2);
                                 hold off;
                                 
-                                Im_pith = imresize(Im_pith,.25);
+                                Im_pith = imresize(Ic,.25);
                                 ofs4 = [OutPath nm1 '-' r '-' num2str(c) '- pith.tif'];
                                 fid2 = fopen(ofs4, 'w+'); % ('output.txt','w');
                                 if fid2 >= 0
-                                    saveas (Im_pith,ofs4,'tif');
+%                                     figure(35)
+%                                     clf
+%                                     imshow(Im_pith)
+                                    saveas (gcf,ofs4,'tif');
                                     fclose(fid2);
                                 end
                                 hold off;
@@ -1348,10 +1368,10 @@ try
                                 scatter (Z(:,2), Z(:,1) , 'r.');
                                 title(['There are ' num2str(numel(Z(:,1))) ' vascular bundles in the stalk']);
                                 hold off;
-                                Im = imresize(Im,.25);
+                                Im = imresize(Ic,.25);
                                 fid2 = fopen(ofs5, 'w+'); % ('output.txt','w');
                                 if fid2 >= 0
-                                    saveas (Im,ofs5,'tif');
+                                    saveas (gcf,ofs5,'tif');
                                     fclose(fid2);
                                 end
                                 
@@ -1366,10 +1386,10 @@ try
                                 plot(blobBoundary(:,2), blobBoundary(:,1), 'b-', 'LineWidth', 1);
                                 title('Pith outline and found vascular bundles superimposed on original image');
                                 hold off;
-                                Im7 = imresize(Im7,.25);
+                                Im7 = imresize(Ic,.25);
                                 fid2 = fopen(ofs7, 'w+'); % ('output.txt','w');
                                 if fid2 >= 0
-                                    saveas (Im7,ofs7,'tif');
+                                    saveas (gcf,ofs7,'tif');
                                     fclose(fid2);
                                 end
                                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1644,9 +1664,9 @@ try
                                                                 hold off;
                                                                 fid3 = fopen( ofs6, 'w+' );
                                                                 if fid3 >= 0
-                                                                    ImZ = imresize( ImZ, .25 );
+                                                                    ImZ = imresize( Ione, .25 );
                                                                     %imwrite ( ImZ,ofs6 ); %
-                                                                    saveas ( ImZ, ofs6, 'tif');
+                                                                    saveas ( gcf, ofs6, 'tif');
                                                                     fclose( fid3 );
                                                                 end
                                                             end
@@ -1684,11 +1704,11 @@ try
             end  % end of "for b = 1:4" in line 42  --> end of loop 2 ("proccess the parts of the image")
         end                                % end of loop 1 ("load the whole image")
     end
-catch ME
-    ME
-    ME.stack
-end
-
-
-
-end
+% catch ME
+%     ME
+%     ME.stack
+% end
+% 
+% 
+% 
+% end
